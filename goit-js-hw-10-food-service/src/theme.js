@@ -9,27 +9,21 @@ const { LIGHT, DARK } = Theme;
 
 toggleTheme.addEventListener('change', themeSwitch);
 
-function enableDarkTheme() {
-  bodyRef.classList.remove(LIGHT);
-  bodyRef.classList.add(DARK);
-  localStorage.setItem('theme', DARK);
-}
-
-function disableDarkTheme() {
-  bodyRef.classList.remove(DARK);
-  bodyRef.classList.add(LIGHT);
-  localStorage.setItem('theme', LIGHT);
+function replaceClass(theme) {
+  bodyRef.classList.value = '';
+  bodyRef.classList.add(theme);
+  localStorage.setItem('Theme', theme);
 }
 
 function themeSwitch() {
   if (toggleTheme.checked) {
-    enableDarkTheme();
+    replaceClass(Theme.DARK);
   } else {
-    disableDarkTheme();
+    replaceClass(Theme.LIGHT);
   }
 }
 
-const checkedTheme = localStorage.getItem('theme');
+const checkedTheme = localStorage.getItem('Theme');
 if (checkedTheme) {
   bodyRef.classList.add(checkedTheme);
 }
